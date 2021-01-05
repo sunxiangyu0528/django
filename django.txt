@@ -1,0 +1,23 @@
+创建Django项目
+file-new-project-django
+python manage.py runserver 用命令行启动django
+用启动器启动
+django-server
+
+settings.py 项目全局配置文件
+urls.py  什么全局url路由表
+wsgi.py  兼容wsgi协议的web服务器入口文件
+
+修改默认时区
+settings.py 里面修改
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+
+1.创建子应用
+1.python manage.py startapp projects  用命令行创建
+2.tools-run manage.py Task  ==》startapp projects  
+
+2.配置settings,子应用，名。apps。子应用名config
+projects.apps.projectsconfig
+
+3.创建视图
