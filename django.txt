@@ -21,3 +21,19 @@ TIME_ZONE = 'Asia/Shanghai'
 projects.apps.projectsconfig
 
 3.创建视图
+
+
+
+request.POST.getlist
+
+
+
+
+
+
+数据库迁移
+makemigrations
+migrate projects
+
+创建超级管理员
+createsuperuser
