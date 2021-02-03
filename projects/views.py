@@ -18,7 +18,7 @@ class ProjectDetial(View):
     def get(self, request, pk):
         # 1.校验前端传的pk（项目id）值，类型是否正确（正整数），在数据库中是否存在
         projects = self.get_object(pk)
-        # 将 模型类转化为字典
+        # 将模型类转化为字典
         serializer = ProjectSerrializers(instance=projects)
 
         return JsonResponse(serializer.data)
@@ -80,5 +80,7 @@ class ProjectList(View):
             serializer.is_valid(raise_exception=True)
         except Exception as e:
             return JsonResponse(serializer.errors)
-        serializer.validated_data
-        project.name=serializer.validated_data["name"]
+        # serializer.validated_data
+        #创建序列化器是，如果同时给instance传参，那么调用sava方法，会自动调用序列化器中的update
+        serializer.save()
+        # project.name=serializer.validated_data["name"]
