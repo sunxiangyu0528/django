@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'rest_framework',
     'django.contrib.staticfiles',
+    'django_filters',
     # 注册子应用
     # 子应用，名。apps。子应用名config
     'projects.apps.ProjectsConfig',
@@ -132,3 +133,46 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        # 设置排序过滤引擎
+        'rest_framework.filters.OrderingFilter',
+        # 设置查询过滤引擎
+        'django_filters.rest_framework.backends.DjangoFilterBackend'
+    ],
+    # 在全局指定分页的引擎
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': 'utils.pageination.PageNumberPaginationManual',
+
+    # 'PAGE_SIZE': 3  # 每页数目
+
+}
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_RENDERER_CLASSES': (
+#         # JSON渲染器为第一优先级
+#         # 'rest_framework.renderers.JSONRenderer',
+#         # 可浏览的API渲染器为第二优先级
+#         'rest_framework.renderers.BrowsableAPIRenderer'
+#
+#     )
+# }
+
+
+# REST_FRAMEWORK = {
+#     # 响应的渲染模块
+#     'DEFAULT_RENDERER_CLASSES': (
+#         # 'rest_framework.renderers.JSONRenderer',
+#         'rest_framework.renderers.BrowsableAPIRenderer',
+#     ),
+#     'DEFAULT_PARSER_CLASSES': [
+#         'rest_framework.parsers.JSONParser',  # 'application/json'
+#         'rest_framework.parsers.FormParser',  # 'application/x-www-form-urlencoded'
+#         'rest_framework.parsers.MultiPartParser'  # multipart/form-data
+#     ],
+# }

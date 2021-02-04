@@ -23,7 +23,8 @@ class ProjectSerrializers(serializers.Serializer):
     name = serializers.CharField(label='项目名称', max_length=200,
                                  help_text='项目名称', write_only=True,
                                  validators=[UniqueValidator(queryset=Projects.objects.all(), message="项目名称不能重复"),
-                                             is_unique_project_name]
+                                             is_unique_project_name],
+                                 error_messages={"max_length": "长度不能超过200"}
 
                                  )
     tester = serializers.CharField(label='测试人员', max_length=200, help_text='测试人员')
@@ -48,7 +49,23 @@ class ProjectSerrializers(serializers.Serializer):
 
     def create(self, validated_data):
         return Projects.objects.create(**validated_data)
-        pass
+
 
     def update(self, instance, validated_data):
         pass
+
+
+class ProjectModelSerializer(serializers.ModelSerializer):
+    class Meta():
+        # 指定参考哪一个模型类创建
+        model = Projects
+        # 指定为模型类的那些字段，来生成序列化器
+        fields = "__all__"
+        # fields = ('id', 'tester')
+        # exclude = ('id')
+        # read_only_fields = ('id')
+        # extra_kwargs = {
+        #     'leader': {'write_only': True}
+        # }
+    def create(self, validated_data):
+        return Projects.objects.create(**validated_data)
